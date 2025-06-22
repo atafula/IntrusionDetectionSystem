@@ -1,0 +1,55 @@
+# Build
+/bin/
+/build/
+/out/
+/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDEs y configuración
+*.iml
+*.ipr
+*.iws
+.idea/
+*.log
+.vscode/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Archivos de entorno
+.env
+*.bak
+*.tmp
+*.old
+
+# Librerías y modelos
+/models/
+*.joblib
+*.pkl
+
+# Datos temporales
+/data/*.csv
+/data/*.pcap
+*.sqlite
+
+# Python (si usás scripts para entrenar modelo)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env/
+
+# Otros
+*.exe
+*.dll
+*.so
