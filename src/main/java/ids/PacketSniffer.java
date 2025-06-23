@@ -1,13 +1,25 @@
 package java.ids;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 public class PacketSniffer {
     
+    // 
     public void startCapture() {
-        // Ejecuta tshark como proceso externo
-        // Recolecta salida línea por línea
-        // Por cada paquete: parsearlo y pasarlo a FeatureExtractor
+        try {
+            ProcessBuilder builder = new ProcessBuilder("tshark", "-l", "-T", "json");
+            Process process = builder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                handlePacket(line);
+            }
+        } catch (IOException e) {
+            System.err.println("Error starting tshark: " + e.getMessage());
+        }
     }
 
     private void handlePacket(String rawData) {
@@ -18,8 +30,4 @@ public class PacketSniffer {
         }
     }
 
-    private String executeTsharkCommand() {
-        // Ejecutar el comando de captura
-        return "";
-    }
 }
