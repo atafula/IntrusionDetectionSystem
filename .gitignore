@@ -40,7 +40,7 @@ desktop.ini
 /data/*.pcap
 *.sqlite
 
-# Python (si usás scripts para entrenar modelo)
+# Python
 __pycache__/
 *.pyc
 *.pyo
