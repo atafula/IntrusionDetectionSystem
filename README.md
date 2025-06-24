@@ -7,7 +7,6 @@ A Java-based intrusion detection system that analyzes network traffic and uses a
 - Python (machine learning model training)
 - scikit-learn
 - libpcap / jNetPcap / tshark
-- Flask (optional, for a simple web interface)
 
 ## 📁 Project Structure
 - `src/` → Java source code
