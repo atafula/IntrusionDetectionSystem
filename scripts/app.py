@@ -39,7 +39,6 @@ def alerts():
                     alerts.append(current_alert)
                     details = []
                     port = ""
-                # Extrae la hora
                 time = line.strip().split("at")[-1].replace("-", "").strip()
                 current_alert = {"time": time, "port": "", "threat": "INTRUSION", "details": []}
             elif line.startswith("Destination Port:"):
