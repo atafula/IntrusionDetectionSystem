@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intrusion Detection System</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Intrusion Detection System</h1>
+  </header>
+
+  <main>
+<section class="status" style="display: flex; align-items: center; gap: 1rem;">
+  <h2 style="margin: 0;">STATUS:</h2>
+  <p id="system-status" style="margin: 0;">Loading status...</p>
+</section>
+
+    <section class="events">
+      <h2>DETECTED EVENTS</h2>
+      <table id="events-table">
+        <thead>
+          <tr>
+            <th>TIME</th>
+            <th>PORT</th>
+            <th>THREAD TYPE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Events will be populated here -->
+        </tbody>
+      </table>
+    </section>
+
+    <section class="logs">
+      <h2>SYSTEM LOGS</h2>
+      <pre id="logs-box">Loading logs...</pre>
+    </section>
+  </main>
+
+  <script>
+    async function fetchSystemStatus() {
+      try {
+        const res = await fetch('http://localhost:5000/api/status');
+        const data = await res.json();
+        const statusText = data.status === 'online'
+          ? '<span class="online">ACTIVE</span>'
+          : '<span class="offline">INACTIVE</span>';
+        document.getElementById("system-status").innerHTML = statusText;
+      } catch (error) {
+        document.getElementById("system-status").innerHTML = '<span class="offline">OFFLINE</span>';
+        console.error("Error fetching system status:", error);
+      }
+    }
+
+    async function fetchEvents() {
+        try {
+            const res = await fetch('http://localhost:5000/api/alerts');
+            const alerts = await res.json();
+
+            const tbody = document.querySelector("#events-table tbody");
+            tbody.innerHTML = "";
+
+            alerts.forEach((alert) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${alert.time || ""}</td>
+                <td>${alert.port || ""}</td>
+                <td>${alert.threat || ""}</td>
+            `;
+            tbody.appendChild(row);
+            });
+        } catch (error) {
+            console.error("Error fetching events:", error);
+        }
+    }
+
+    async function fetchLogs() {
+      try {
+        const res = await fetch('http://localhost:5000/api/logs');
+        const data = await res.json();
+        document.getElementById("logs-box").textContent = data.logs.join('');
+      } catch (error) {
+        document.getElementById("logs-box").textContent = "Error fetching logs";
+        console.error("Error fetching logs:", error);
+      }
+    }
+
+    // Initialize
+    fetchSystemStatus();
+    fetchEvents();
+    fetchLogs();
+
+    // Refresh every 3 seconds
+    setInterval(() => {
+      fetchSystemStatus();
+      fetchEvents();
+      fetchLogs();
+    }, 1000);
+  </script>
+
+</body>
+</html>
