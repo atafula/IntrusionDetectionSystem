@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.logging.*;
-import org.json.JSONObject;
 
 public class PacketSniffer {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
@@ -38,12 +37,15 @@ public class PacketSniffer {
             while ((line = reader.readLine()) != null) {
                 // Handle each packet
                 if (!line.trim().isEmpty()) {
-                    logger.info("Captured packet JSON: " + line);
-                    System.out.println("Captured packet JSON: " + line);
-                    handlePacket(line);
-                    logger.info("------------------------------");
-                    System.out.println("------------------------------");
-                }
+                    if(line.contains("\"layers\"")) {
+                        logger.info("Captured packet JSON: " + line);
+                        handlePacket(line);
+                        logger.info("------------------------------");
+                        System.out.println("------------------------------");
+                    }
+                } else {
+                    logger.log(Level.FINE, "Failed to extract features, not a valid packet: " + line); 
+                }       
             }
         } catch (IOException e) {
             // Error handling when starting tshark

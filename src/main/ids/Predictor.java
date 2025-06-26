@@ -30,7 +30,6 @@ public class Predictor {
                 writer.write(jsonString);
                 writer.flush();
                 logger.info("Sent JSON to Python script: " + jsonString);
-                System.out.println("Sent JSON to Python script: " + jsonString);
             }
 
             // Read output

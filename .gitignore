@@ -1,4 +1,4 @@
-# Build
+# Build outputs
 /bin/
 /build/
 /out/
@@ -8,34 +8,36 @@
 *.war
 *.ear
 
-# IDEs y configuración
+# IDE and editor settings
 *.iml
 *.ipr
 *.iws
 .idea/
-*.log
 .vscode/
 *.swp
 *.swo
 
-# Sistema operativo
+# Logs
+*.log
+
+# OS generated files
 .DS_Store
 Thumbs.db
 ehthumbs.db
 desktop.ini
 
-# Archivos de entorno
+# Environment and backup files
 .env
 *.bak
 *.tmp
 *.old
 
-# Librerías y modelos
+# Libraries and models
 /models/
 *.joblib
 *.pkl
 
-# Datos temporales
+# Temporary data
 /data/*.csv
 /data/*.pcap
 *.sqlite
@@ -49,7 +51,7 @@ __pycache__/
 venv/
 .env/
 
-# Otros
+# Executables and shared libraries
 *.exe
 *.dll
 *.so
