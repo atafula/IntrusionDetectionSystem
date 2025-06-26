@@ -29,7 +29,7 @@ public class Predictor {
                 String jsonString = new JSONObject(features).toString();
                 writer.write(jsonString);
                 writer.flush();
-                logger.info("Sent JSON to Python script: " + jsonString);
+                //logger.info("Sent JSON to Python script: " + jsonString);
             }
 
             // Read output
