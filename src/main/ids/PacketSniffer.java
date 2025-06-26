@@ -47,13 +47,13 @@ public class PacketSniffer {
                         try {
                             JSONObject obj = new JSONObject(line);
                             JSONObject layers = obj.getJSONObject("layers");
-
+                            /*
                             if (layers.has("eth")) {
                                 JSONObject eth = layers.getJSONObject("eth");
                                 System.out.println("Ethernet vendor: " + eth.optString("eth_eth_src_oui_resolved"));
                                 logger.info("Ethernet vendor: " + eth.optString("eth_eth_src_oui_resolved"));
 
-                            }
+                            } */
                             if (layers.has("dns")) {
                                 JSONObject dns = layers.getJSONObject("dns");
                                 System.out.println("DNS Query: " + dns.optString("dns_dns_qry_name"));
