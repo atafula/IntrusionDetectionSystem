@@ -45,4 +45,3 @@ joblib.dump(model, MODEL_PATH)
 joblib.dump(feature_columns, FEATURES_PATH)
 
 print("Final model trained and saved at:", MODEL_PATH)
-print("Feature columns saved at:", FEATURES_PATH)

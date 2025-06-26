@@ -1,42 +1,25 @@
 import sys
 import joblib
 import numpy as np
+import json
+import os
 
-MODEL_PATH = '../models/final_model.pkl'
-FEATURES_PATH = '../models/feature_columns.pkl'
+MODEL_PATH = os.path.join(os.getcwd(), 'models', 'final_model.pkl')
+FEATURES_PATH = os.path.join(os.getcwd(), 'models', 'feature_columns.pkl')
 
 def parse_features():
-    
-    """
-    Reads feature inputs from standard input, expecting each line in 'key=value' format.
-    Converts values to float. If conversion fails, exits with an error message.
-
-    Returns:
-        dict: A dictionary mapping feature names to their float values.
-    """
-    features = {}
-    for line in sys.stdin:
-        line = line.strip()
-        if not line or '=' not in line:
-            continue
-        key, value = line.split('=', 1)
-        try:
-            features[key] = float(value)
-        except ValueError:
-            print(f"Invalid value for '{key}', it must be numeric.")
-            sys.exit(1)
-    return features
+    try:
+        input_json = sys.stdin.read()
+        features = json.loads(input_json)
+        # convert to float
+        for k, v in features.items():
+            features[k] = float(v)
+        return features
+    except Exception as e:
+        print(f"Error parsing input JSON: {e}")
+        sys.exit(1)
 
 def main():
-    """
-    Main execution function:
-    - Parses features from input.
-    - Loads the trained model and the expected feature columns.
-    - Fills missing features with default value 0.0.
-    - Validates the input vector (no NaN or infinite values).
-    - Predicts using the loaded model.
-    - Prints 'Attack' if prediction is 1, otherwise 'Benign'.
-    """
     features = parse_features()
 
     try:
@@ -46,22 +29,18 @@ def main():
         print(f"Error loading model or feature columns: {e}")
         sys.exit(1)
 
-    # Fill missing features with default value 0.0
     for col in feature_columns:
         if col not in features:
             features[col] = 0.0
 
     input_vector = np.array([[features[col] for col in feature_columns]])
 
-    # Check for NaN or infinite values in input
     if np.any(np.isnan(input_vector)) or np.any(np.isinf(input_vector)):
         print("Input vector contains NaN or infinite values.")
         sys.exit(1)
 
     result = model.predict(input_vector)[0]
-    print("Attack" if result == 1 else "Benign")
+    print("ATTACK" if result == 1 else "BENIGN")
 
 if __name__ == "__main__":
-    if sys.stdin.isatty():
-        print("Please enter features one per line in 'key=value' format and finish with Ctrl+Z (Windows) or Ctrl+D (Linux/Mac).")
     main()
