@@ -11,7 +11,6 @@ A Java-based Intrusion Detection System (IDS) that analyzes network traffic in r
 ## Project Structure
 - `src/` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Java source code
 - `scripts/` &nbsp;&nbsp;&nbsp;&nbsp;→ Python scripts for ML training and preprocessing
-- `data/` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Datasets and packet capture files
 - `models/` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Trained ML models
 - `docs/` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Documentation and architecture diagrams
 
