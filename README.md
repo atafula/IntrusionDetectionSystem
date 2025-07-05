@@ -31,7 +31,7 @@ A Java-based Intrusion Detection System (IDS) that analyzes network traffic in r
 3. The system will analyze network packets and trigger alerts upon detecting suspicious activity.
 
 ## Project Status
-🔸 In development — initial version.
+🔸  Finished — Initial version completed
 
 ## Author
 - Adrián Tafula - [@atafula](https://github.com/atafula)
