@@ -24,8 +24,8 @@ A Java-based Intrusion Detection System (IDS) that analyzes network traffic in r
 2. **Start the real-time IDS**  
    Compile and run the main Java class:
    ```sh
-   javac -d build src/main/ids/*.java
-   java -cp build ids.Main
+   javac -cp "lib/*" -d build src/main/ids/*.java
+   java -cp "build;lib/*" ids.Main
    ```
 3. The system will analyze network packets and trigger alerts upon detecting suspicious activity.
 
